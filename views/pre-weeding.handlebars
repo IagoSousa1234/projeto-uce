@@ -1,0 +1,84 @@
+  <section class="portfolio-titulo">
+    <h2>Portfólio</h2>
+    <h1>Pré Wedding</h1>
+  </section>
+
+  {{#if erro}}
+  <p class="form-erro">{{erro}}</p>
+  {{/if}}
+
+  {{#if isAdmin}}
+  <section class="admin-portfolio">
+    <h2>➕ Adicionar ensaio</h2>
+    <form action="/pre-weeding/adicionar" method="POST" enctype="multipart/form-data" class="form-portfolio">
+      <label for="titulo-ensaio">Título</label>
+      <input type="text" id="titulo-ensaio" name="titulo" maxlength="150" placeholder="Ex.: Ana &amp; Pedro" required>
+
+      <label for="midias-ensaio">Fotos e vídeos (pode escolher vários — até 30 por vez, 500 MB cada)</label>
+      <input type="file" id="midias-ensaio" name="midias" multiple required
+             accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/ogg">
+
+      <button type="submit" class="button-agendamento">Adicionar ensaio</button>
+    </form>
+  </section>
+  {{/if}}
+
+  {{#each albuns}}
+  <div class="fundo">
+    {{#with principal}}
+    <section class="imagem-principal">
+      {{#if ehVideo}}
+      <video controls preload="metadata" src="{{url}}"></video>
+      {{else}}
+      <img src="{{url}}" alt="{{../titulo}}">
+      {{/if}}
+    </section>
+    {{/with}}
+
+    <section class="names-titulo">{{titulo}}</section>
+    <section class="names-data">{{dataTexto}}</section>
+
+    {{#if galeria.length}}
+    <div class="galeria">
+      {{#each galeria}}
+      {{#if ehVideo}}
+      <video controls preload="metadata" src="{{url}}"></video>
+      {{else}}
+      <img src="{{url}}" alt="{{../titulo}}">
+      {{/if}}
+      {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if @root.isAdmin}}
+    <details class="admin-album">
+      <summary>⚙ Gerenciar este ensaio</summary>
+
+      <ul class="admin-album-lista">
+        {{#each midias}}
+        <li>
+          {{#if ehVideo}}
+          <video src="{{url}}" preload="metadata" muted></video>
+          {{else}}
+          <img src="{{url}}" alt="">
+          {{/if}}
+          <form action="/pre-weeding/midias/{{id}}/remover" method="POST"
+                onsubmit="return confirm('Remover este arquivo?')">
+            <button type="submit" class="btn-recusar">🗑 Remover</button>
+          </form>
+        </li>
+        {{/each}}
+      </ul>
+
+      <form action="/pre-weeding/albuns/{{id}}/remover" method="POST"
+            onsubmit="return confirm('Remover o ensaio inteiro? Todas as fotos e vídeos serão apagados.')">
+        <button type="submit" class="btn-recusar">🗑 Remover ensaio inteiro</button>
+      </form>
+    </details>
+    {{/if}}
+  </div>
+
+  <div class="faixa-portfolio"></div>
+  {{else}}
+  <p class="portfolio-vazio">Em breve novos ensaios por aqui.</p>
+  {{/each}}

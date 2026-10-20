@@ -1,0 +1,35 @@
+<main class="conteudo-principal">
+
+    <h1>Administradores</h1>
+
+    {{#if erro}}
+        <p class="form-erro">{{erro}}</p>
+    {{/if}}
+
+    {{#if linkAgenda}}
+    <p>
+        📅 Os agendamentos <strong>aceitos</strong> são salvos numa agenda compartilhada do Google.
+        <a href="{{linkAgenda}}" target="_blank" rel="noopener">Adicionar ao meu Google Agenda</a>
+    </p>
+    {{/if}}
+
+    <form method="post" action="/admin/adicionar">
+        <input type="email" name="email" placeholder="E-mail do novo admin" maxlength="100" required>
+        <button type="submit" class="button-agendamento">Adicionar</button>
+    </form>
+
+    <h2>E-mails com acesso de admin</h2>
+
+    <ul>
+        {{#each admins}}
+            <li>
+                {{email}}
+                <form method="post" action="/admin/remover" style="display:inline">
+                    <input type="hidden" name="email" value="{{email}}">
+                    <button type="submit" >Remover</button>
+                </form>
+            </li>
+        {{/each}}
+    </ul>
+
+</main>

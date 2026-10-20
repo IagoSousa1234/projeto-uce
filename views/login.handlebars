@@ -1,0 +1,59 @@
+<main class="conteudo-principal">
+
+<form method="post" action="/login/">
+
+        <input type="hidden" name="next" value="{{next}}">
+
+        <div class="login">
+
+            <div class="login-container">
+
+                <div class="foto">
+                    <img src="/img/Kleber/Kleber_studio.jpg"
+                        class="img-login"
+                        alt="Foto">
+                </div>
+
+                <div class="dados">
+
+                    <h1>Seja Bem-Vindo!</h1>
+
+                        {{#if erro}}
+                            <p class="form-erro">{{erro}}</p>
+                        {{else if next}}
+                            <p class="form-aviso">Faça login para acessar esta página.</p>
+                        {{/if}}
+
+
+                <div class="forms-inputs">
+                    <label><strong>Email:</strong></label>
+                    <input type="email" name="email" placeholder="Seu e-mail" value="{{valores.email}}" maxlength="100" autocomplete="email" required>
+                    <label><strong>Senha:</strong></label>
+                    <input type="password" name="senha" placeholder="Informe a senha" autocomplete="current-password" required>
+                </div>
+
+                    <p class="esqueci">Esqueci Minha Senha</p>
+
+                <button type="submit" class="button-agendamento">Entrar</button>
+
+
+            <div class="bottom">
+
+            <div class="google-login">
+                <img src="/icon/google.png" class="google" alt="">
+                <span>Google</span>
+            </div>
+
+            <p class="criar">
+                Não tem uma Conta? <a href="/cadastro"><strong>Crie uma!</strong></a>
+            </p>
+
+        </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+</main>

@@ -1,0 +1,69 @@
+<main class="conteudo-principal">
+  <form action="/agendamento/confirmar" method="POST" class="form-container">
+    <section class="formulario">
+      <h2>📅 Novo Agendamento</h2>
+
+      <label for="nome">Nome Completo</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+
+      <label for="servico" name="servico">Serviço</label>
+      <select id="servico" name="servico" name="servico"required>
+        <option value="" disabled selected>Selecione o serviço</option>
+        <option value="Sessão de Fotos">Sessão de Fotos</option>
+        <option value="formatura" name="formatura">Formatura</option>
+        <option value="casamento" name="casamento">Casamento</option>
+      </select>
+
+      <label for="data">Data</label>
+      <input type="date" id="data" name="data" required />
+
+      <label for="hora">Horário</label>
+      <input type="time" id="hora" name="horario" required />
+
+      <button class="button-agendamento" type="submit">Agendar</button>
+    </section>
+  </form>
+
+  <section class="agendamentos" id="listaAgendamentos">
+    <h2 class="titulo-agendamentos">📌 {{#if isAdmin}}Todos os agendamentos{{else}}Meus agendamentos{{/if}}</h2>
+
+    {{#if aviso}}
+    <p class="form-erro">{{aviso}}</p>
+    {{/if}}
+
+    <div class="lista-agendamentos">
+      {{#each agendamento}}
+      <div class="card-agendamento">
+        <div class="card-topo">
+          <span class="card-id">Agendamento #{{id_agendamento}}</span>
+          <span class="status status-{{status}}">{{statusTexto}}</span>
+        </div>
+
+        <div class="card-info">
+          <p><span class="rotulo">👤 Cliente</span> <span class="valor">{{nome_cliente}}</span></p>
+          <p><span class="rotulo">📸 Serviço</span> <span class="valor">{{servico}}</span></p>
+          <p><span class="rotulo">📅 Data</span> <span class="valor">{{data_agendamento}}</span></p>
+          <p><span class="rotulo">🕒 Horário</span> <span class="valor">{{horario_agendamento}}</span></p>
+        </div>
+
+        {{#if ../isAdmin}}
+        {{#if ehPendente}}
+        <div class="card-acoes">
+          <form action="/agendamento/{{id_agendamento}}/status" method="POST">
+            <input type="hidden" name="status" value="aceito">
+            <button type="submit" class="btn-aceitar">✔ Aceitar</button>
+          </form>
+          <form action="/agendamento/{{id_agendamento}}/status" method="POST">
+            <input type="hidden" name="status" value="recusado">
+            <button type="submit" class="btn-recusar">✖ Recusar</button>
+          </form>
+        </div>
+        {{/if}}
+        {{/if}}
+      </div>
+      {{else}}
+      <p>Nenhum agendamento por aqui ainda.</p>
+      {{/each}}
+    </div>
+  </section>
+</main>

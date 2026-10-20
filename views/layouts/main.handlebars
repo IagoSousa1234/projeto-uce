@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css"> 
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/fonte.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <title>{{#if title}}{{title}} | {{/if}}Kleber Kawasaki</title>
+</head>
+<body>
+    <header class="cabecalho">
+        <a href="/">
+            <img class="cabecalho_logo" src="/img/logotipo_kleber_kawassaki.png" title="Ir para a pagina do Kleber Kawassaki" alt="Kleber Kawassaki">
+        </a>
+
+        <!-- Comeco -->
+
+        <nav>
+            <ul class="cabecalho_menu">
+                <li class="cabecalho_item-menu"><a href="/">Início</a></li>
+
+                <li class="cabecalho_item-menu dropdown">
+                <a href="/portifolio/" class="dropbtn">Portfólio ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="/pre-weeding/">Pré Wedding</a></li>    
+                    <li><a href="/pre-weeding/">Casamentos</a></li>
+                    <li><a href="/pre-weeding/">Corporativos</a></li>
+                    <li><a href="/pre-weeding/">Gestantes</a></li>
+                    <li><a href="/pre-weeding/">Acompanhamentos</a></li>
+                    <li><a href="/pre-weeding/">Debutantes</a></li>
+                </ul>
+                </li>
+
+                <li class="cabecalho_item-menu cabecalho_item-menu-contato">
+                <a href="https://api.whatsapp.com/send?phone=5519993058960&text=Ol%C3%A1,%20estava%20visitando%20seu%20site%20e%20me%20interessei%20pelo%20seu%20trabalho.">Contato</a>
+                </li>
+
+                <!-- Dropdown do usuário -->
+                <li class="cabecalho_item-menu dropdown dropdown-usuario">
+                <button type="button" class="dropbtn icone-usuario" aria-label="Menu do usuário" aria-haspopup="true">
+                    <a href="{{#if user}}/agendamento/{{else}}/login/{{/if}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="8" r="4"></circle>
+                    <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+                    </svg>
+                    </a>
+                </button>
+                <ul class="dropdown-content dropdown-direita">
+                    {{#if user}}
+                    <li class="menu-usuario-nome">Olá, {{primeiroNome}}{{#if isAdmin}} <span class="selo-admin">Admin</span>{{/if}}</li>
+                    {{else}}
+                    <li><a href="/login/">Login</a></li>
+                    <li><a href="/cadastro/">Cadastro</a></li>
+                    {{/if}}
+                    <li><a href="/agendamento/">Agenda</a></li>
+                    <li><a href="/curso/">Cursos</a></li>
+                    {{#if isAdmin}}
+                    <li><a href="/admin/">Painel Admin</a></li>
+                    {{/if}}
+                    {{#if user}}
+                    <li>
+                        <form action="/logout/" method="post" class="form-sair">
+                            <button type="submit">Sair</button>
+                        </form>
+                    </li>
+                    {{/if}}
+                </ul>
+                </li>
+            </ul>
+        </nav>
+
+    <!-- fim -->
+
+    </header>
+    {{#if flash}}
+    <div class="aviso aviso-{{flash.tipo}}" role="alert">{{flash.texto}}</div>
+    {{/if}}
+    {{{body}}}
+    <footer>
+    <div class="footer-container">
+        <div class="footer-address">
+            <strong>Endereço:</strong><br>
+            <p> Avenida João Osório, 622, loja - Centro<br>
+            São João da Boa Vista / SP</p>
+        </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/kleberkawasakifotografia/"><img src="/icon/Instagram.png" alt="Instagram"></a>
+                <a href="https://api.whatsapp.com/send?phone=5519993058960&text=Ol%C3%A1,%20estava%20visitando%20seu%20site%20e%20me%20interessei%20pelo%20seu%20trabalho."><img src="/icon/image.png" alt="WhatsApp"></a>
+                <a href="https://www.facebook.com/kleberkawasaki?mibextid=ZbWKwL"><img src="/icon/Facebook.png" alt="Facebook"></a>
+            </div>
+    </div>
+</footer>
+{{#each scripts}}
+<script src="{{this}}" defer></script>
+{{/each}}
+</body>
+</html>

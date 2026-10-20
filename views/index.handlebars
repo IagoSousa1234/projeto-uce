@@ -1,0 +1,126 @@
+  <div class="apresentacao_pai">
+    <div class="apresentacao">
+      <div class="apresentacao_titulo-item">
+          <h3>Kleber Kawassaki</h3>
+          <p>Estudio de Fotografia</p>
+        </div>
+      <div class="apresentacao_img">
+      </div>
+    </div>
+  </div>
+
+  <div class="sobre">
+    <div class="carousel-container">
+      <div class="carousel-slide" id="carouselSlide">
+        <img src="img/Kleber/Kleber_studio.jpg" alt="Imagem 1">
+        <img src="img/Kleber/Tia studio.jpg" alt="Imagem 2">
+        <img src="img/Kleber/Kleber natal.jpg" alt="Imagem 3">
+        <video controls muted src="img/c.mp4"></video>
+      </div>
+      <button class="nav-button prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="nav-button next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    <div class="sobre_texto">
+      <p>Desde 2009, nosso objetivo tem sido usar a fotografia para contar e eternizar histórias. Somos um casal apaixonado pelo que fazemos, tratando datas especiais com respeito e responsabilidade.
+        <br>
+        <br>
+        Contamos com uma equipe dedicada à excelência, sempre em busca de melhorias e inovação, com investimentos em equipamentos de última geração.
+        <br>
+        <br>
+        Nosso foco é capturar a essência dos momentos, registrando sentimentos e emoções que permanecerão para sempre.
+        Com 13 anos de experiência, nos profissionalizamos e desenvolvemos uma visão autoral para a fotografia, sempre buscando emocionar e criar memórias duradouras.</p>
+    </div>
+  </div>
+
+
+    
+    <div class="cinema">
+        <div class="containervideo selection" id="Cinema">
+            <video controls autoplay muted loop>
+                <source src="img/AQPAdxi2GJNUtWJp4Wasj-kiWX43afW61rPrrm1t9gVuro7rtFzyK7uEfo7pQOVYD7dOZX9E3yjy_L4L7WlaDppRWyZ2s0eLBC9LKzQ.mp4" type="video/mp4">
+            video>
+        </div>
+        <h3> Guilherme & Manu  </h3>
+        <p>26 de Fevereiro de 2025</p>
+    </div>
+
+<div class="novidades">
+    <h2 class="novidades-titulo">Novidades</h2>
+    <div class="cards-container">
+        <div class="card">
+            <img src="img/Pré wedding/corporativo/1.jpg" alt="Isabela Martins">
+            <div class="card-nome">Isabela Martins</div>
+            <div class="card-data">10 de outubro de 2024</div>
+        </div>
+        <div class="card">
+            <img src="img/Pré wedding/corporativo/2.jpg" alt="Isabela Martins">
+            <div class="card-nome">Isabela Martins</div>
+            <div class="card-data">10 de outubro de 2024</div>
+        </div>
+        <div class="card">
+            <img src="img/Pré wedding/corporativo/3.jpg" alt="Isabela Martins">
+            <div class="card-nome">Isabela Martins</div>
+            <div class="card-data">10 de outubro de 2024</div>
+        </div>
+        <div class="card">
+            <img src="img/Pré wedding/corporativo/4.jpg" alt="Isabela Martins">
+            <div class="card-nome">Isabela Martins</div>
+            <div class="card-data">10 de outubro de 2024</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card_comentario">
+      <img src="img/Pré wedding/Japones/17.jpg" alt="José Augusto">
+      <p>Dois corações, uma missão: <br> cuidar de vidas e agora, criar uma. <br> Nosso maior projeto está a caminho</p>
+      <h3>José Augusto</h3>
+    </div>
+    
+    <div class="card_comentario">
+      <img src="img/Pré wedding/Destaque/5.jpg" alt="Renata Azevedo">
+      <p>Carrego no ventre o maior dos milagres e no coração, um amor que só cresce. <br> Contando os dias para te conhecer, meu amor</p>
+      <h3>Renata Azevedo</h3>
+    </div>
+    
+    <div class="card_comentario">
+      <img src="img/Pré wedding/Cabana/19.jpg" alt="Lucas Almeida">
+      <p>Às vezes, o simples fato de seguir em frente já é um grande passo. <br> Que a coragem de hoje seja o caminho para a conquista de amanhã.</p>
+      <h3>Lucas Almeida</h3>
+    </div>
+  </div>
+
+
+  <div id="galeria-categorias">
+    <div class="card-categoria" id="categoria-casamento">
+      <h3 class="titulo-categoria">Casamento</h3>
+      <a class="link-categoria" href="#">Veja mais...</a>
+      <img class="imagem-categoria" src="img/Pré wedding/Cabana/1.jpg" alt="Imagem de Casamento">
+    </div>
+  
+    <div class="card-categoria" id="categoria-debutantes">
+      <h3 class="titulo-categoria">Debutantes</h3>
+      <a class="link-categoria" href="#">Veja mais...</a>
+      <img class="imagem-categoria" src="img/Pré wedding/Destaque/1.jpg" alt="Imagem de Debutantes">
+    </div>
+  
+    <div class="card-categoria" id="categoria-ensaios">
+      <h3 class="titulo-categoria">Ensaios</h3>
+      <a class="link-categoria" href="#">Veja mais...</a>
+      <img class="imagem-categoria" src="img/Pré wedding/Destaque/2.jpg" alt="Imagem de Ensaios">
+    </div>
+  </div>
+
+<script>
+  let index = 0;
+  const slide = document.getElementById("carouselSlide");
+  const totalSlides = slide.children.length;
+
+  function moveSlide(step) {
+    index = (index + step + totalSlides) % totalSlides;
+    slide.style.transform = `translateX(-${index * 100}%)`; 
+  }
+
+  // Auto slide (opcional)
+  setInterval(() => moveSlide(1), 30000); // troca a cada 30 segundos
+</script>

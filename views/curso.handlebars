@@ -1,0 +1,102 @@
+<main>
+    <section class="intro">
+      <h1>Seja Bem-Vindo</h1>
+      <p class="subtitulo">Seja bem-vindo ao nosso curso de fotografia!</p>
+      <p class="descricao">
+        Nosso objetivo é ensinar desde os conceitos básicos da fotografia até as técnicas e métodos utilizados pelos melhores profissionais da área.
+        Queremos te ajudar a desenvolver suas habilidades e a se tornar um grande fotógrafo, capaz de capturar imagens incríveis com confiança e criatividade.
+      </p>
+      <p class="videos">
+        <strong>Abaixo, você encontrará as video-aulas!</strong><br>
+        Então, pegue seu caderno para anotar, prepare um lanchinho e vamos juntos mergulhar nesse aprendizado!
+      </p>
+    </section>
+
+    {{#if erro}}
+    <p class="form-erro">{{erro}}</p>
+    {{/if}}
+
+    {{#if isAdmin}}
+    <section class="admin-aulas">
+      <h2>➕ Adicionar aula</h2>
+      <form action="/curso/aulas/adicionar" method="POST" enctype="multipart/form-data" class="form-aula">
+        <label for="titulo-nova">Título</label>
+        <input type="text" id="titulo-nova" name="titulo" maxlength="150" placeholder="Ex.: Introdução à Fotografia" required>
+
+        <label for="descricao-nova">Descrição</label>
+        <textarea id="descricao-nova" name="descricao" rows="4" placeholder="Sobre o que é esta aula?"></textarea>
+
+        <label for="video-novo">Vídeo (MP4, WebM ou OGG — até 500 MB)</label>
+        <input type="file" id="video-novo" name="video" accept="video/mp4,video/webm,video/ogg" required>
+
+        <button type="submit" class="button-agendamento">Adicionar aula</button>
+      </form>
+    </section>
+    {{/if}}
+
+    {{#if aulas.length}}
+    <section class="player">
+      <div id="aula-container">
+        <video controls preload="metadata" id="video"></video>
+        <p id="titulo-aula"></p>
+        <p id="descricao-aula" class="descricao-aula"></p>
+      </div>
+
+      <div class="botoes">
+        <button type="button" onclick="anteriorAula()">Anterior</button>
+        <button type="button" onclick="proximaAula()">Próxima</button>
+      </div>
+    </section>
+
+    <section class="lista">
+      <h2>LISTA DE AULAS</h2>
+      <ul id="lista-aulas">
+        {{#each aulas}}
+        <li class="aula-item" data-id="{{id}}" data-titulo="Ep. {{numero}}: {{titulo}}" data-descricao="{{descricao}}">
+          <span class="aula-titulo">Ep. {{numero}}: {{titulo}}</span>
+          {{#if ../isAdmin}}
+          <form action="/curso/aulas/{{id}}/remover" method="POST" class="form-remover-aula"
+                onsubmit="return confirm('Remover esta aula? O vídeo também será apagado.')">
+            <button type="submit" class="btn-recusar">🗑 Remover</button>
+          </form>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <script>
+      (function(){
+        var itens = Array.prototype.slice.call(document.querySelectorAll('#lista-aulas .aula-item'));
+        var video = document.getElementById('video');
+        var titulo = document.getElementById('titulo-aula');
+        var descricao = document.getElementById('descricao-aula');
+        var atual = 0;
+
+        function mostrar(i, tocar){
+          atual = i;
+          var item = itens[i];
+          video.src = '/curso/video/' + item.getAttribute('data-id');
+          video.load();
+          titulo.textContent = item.getAttribute('data-titulo');
+          descricao.textContent = item.getAttribute('data-descricao') || '';
+          itens.forEach(function(el, j){ el.classList.toggle('aula-ativa', j === i); });
+          if(tocar){ video.play().catch(function(){}); }
+        }
+
+        window.anteriorAula = function(){ if(atual > 0){ mostrar(atual - 1, true); } };
+        window.proximaAula = function(){ if(atual < itens.length - 1){ mostrar(atual + 1, true); } };
+
+        itens.forEach(function(item, i){
+          item.querySelector('.aula-titulo').addEventListener('click', function(){ mostrar(i, true); });
+        });
+
+        mostrar(0, false);
+      })();
+    </script>
+    {{else}}
+    <section class="lista">
+      <p>Ainda não há aulas cadastradas.</p>
+    </section>
+    {{/if}}
+  </main>
